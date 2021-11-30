@@ -18,6 +18,9 @@ public class Vehiculo {
     @Column(unique = true,nullable = false,name="Placa")
     private String placa;
 
+    @Column(name="Dueno",nullable = false)
+    private String dueno;
+
     @Column(name="Fecha_Ingreso")
     private LocalDate fechaIngreso = LocalDate.now();
 
@@ -42,9 +45,6 @@ public class Vehiculo {
     @Column(name="FechaCalcularSalida")
     private LocalDateTime fechaCalcuarSalida ;
 
-
-
-
     public Long getId() {
         return id;
     }
@@ -59,6 +59,14 @@ public class Vehiculo {
 
     public void setPlaca(String placa) {
         this.placa = placa;
+    }
+
+    public String getDueno() {
+        return dueno;
+    }
+
+    public void setDueno(String dueno) {
+        this.dueno = dueno;
     }
 
     public LocalDate getFechaIngreso() {
