@@ -1,7 +1,6 @@
 package com.sofka.Parking.Model;
 
 import javax.persistence.*;
-import javax.xml.crypto.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

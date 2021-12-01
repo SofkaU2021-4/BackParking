@@ -30,6 +30,11 @@ public class VehiculoController {
         return new ResponseEntity (vehiculoService.delete(id), HttpStatus.OK);
     }
 
+    @PatchMapping("api/vehiculo")
+    public ResponseEntity<?> update(@RequestBody Vehiculo vehiculo){
+        return new ResponseEntity (vehiculoService.update(vehiculo), HttpStatus.OK);
+    }
+
 /*    @GetMapping(value = "api/{id}/todo")
    public Todo get(@PathVariable("id") Long id){
         return service.get(id);
