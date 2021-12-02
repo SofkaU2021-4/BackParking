@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface VehiculoRepository extends CrudRepository<Vehiculo,Long> {
     Optional<Vehiculo> findByPlaca(String placa);
+    boolean existsByPlaca(String Placa);
 }

@@ -7,6 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
@@ -15,9 +19,9 @@ public class VehiculoService {
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
-    public Iterable<Vehiculo> list(){
-            return vehiculoRepository.findAll();
-        }
+  public Iterable<Vehiculo> list(){
+        return vehiculoRepository.findAll();
+    }
 
     public Vehiculo save(Vehiculo vehiculo){
             return vehiculoRepository.save(vehiculo);
@@ -42,4 +46,34 @@ public class VehiculoService {
         vehiculoUpdate.setPlaca(vehiculo.getPlaca());
         return vehiculoRepository.save(vehiculoUpdate);
     }
+////
+    public boolean existsByPlaca(String placa){
+        return vehiculoRepository.existsByPlaca(placa);
+    }
+
+    public boolean existsById(Long id){
+        return vehiculoRepository.existsById(id);
+    }
+
+    public String updateValor(Vehiculo vehiculo){
+        if(!existsByPlaca(vehiculo.getPlaca()))
+            return "no existe la placa a modificar";
+        Vehiculo vehiculoUpdate = findById(vehiculo.getId());
+        vehiculoUpdate.setFechaSalida(LocalDate.now());
+        vehiculoUpdate.setHoraSalida(LocalTime.now());
+        vehiculoUpdate.setFechaCalcularSalida(LocalDateTime.now());
+        vehiculoUpdate.setTotal((ChronoUnit.MINUTES.between(vehiculoUpdate.getFechaCalcularIngreso(), vehiculoUpdate.getFechaCalcularSalida()))*100);
+        vehiculoRepository.save(vehiculoUpdate);
+        return "producto actualizado";
+    }
+
+    public String updateSalida(Vehiculo vehiculo){
+        if(!existsByPlaca(vehiculo.getPlaca()))
+            return "no existe la placa a modificar";
+        Vehiculo vehiculoUpdate = findById(vehiculo.getId());
+        vehiculoUpdate.setEstado(false);
+        vehiculoRepository.save(vehiculoUpdate);
+        return "producto actualizado";
+    }
+
 }

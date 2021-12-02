@@ -34,10 +34,16 @@ public class VehiculoController {
     public ResponseEntity<?> update(@RequestBody Vehiculo vehiculo){
         return new ResponseEntity (vehiculoService.update(vehiculo), HttpStatus.OK);
     }
+    ///// nuevos endpoint
 
-/*    @GetMapping(value = "api/{id}/todo")
-   public Todo get(@PathVariable("id") Long id){
-        return service.get(id);
-    }*/
+    @PatchMapping("api/vehiculo/valor")
+    public ResponseEntity updateValor(@RequestBody Vehiculo vehiculo){
+        return new ResponseEntity(vehiculoService.updateValor(vehiculo), HttpStatus.OK);
+    }
+
+    @PatchMapping("api/vehiculo/salida")
+    public ResponseEntity updateSalida(@RequestBody Vehiculo vehiculo){
+        return new ResponseEntity(vehiculoService.updateSalida(vehiculo), HttpStatus.OK);
+    }
 
 }
