@@ -36,9 +36,9 @@ public class VehiculoController {
     }
     ///// nuevos endpoint
 
-    @PatchMapping("api/vehiculo/valor")
-    public ResponseEntity updateValor(@RequestBody Vehiculo vehiculo){
-        return new ResponseEntity(vehiculoService.updateValor(vehiculo), HttpStatus.OK);
+    @PatchMapping("api/vehiculo/temporal")
+    public ResponseEntity updateValorTemporal(@RequestBody Vehiculo vehiculo){
+        return new ResponseEntity(vehiculoService.updateValorTemporal(vehiculo), HttpStatus.OK);
     }
 
     @PatchMapping("api/vehiculo/salida")

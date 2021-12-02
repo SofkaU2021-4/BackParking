@@ -41,6 +41,9 @@ public class Vehiculo {
     @Column(name="FechaCalcularIngreso")
     private LocalDateTime fechaCalcularIngreso = LocalDateTime.now();
 
+    @Column(name="FechaTemporalCalcularSalida")
+    private LocalDateTime fechaTemporalCalcularSalida ;
+
     @Column(name="FechaCalcularSalida")
     private LocalDateTime fechaCalcularSalida ;
 
@@ -129,6 +132,14 @@ public class Vehiculo {
 
     public void setFechaCalcularIngreso(LocalDateTime fechaCalcularIngreso) {
         this.fechaCalcularIngreso = fechaCalcularIngreso;
+    }
+
+    public LocalDateTime getFechaTemporalCalcularSalida() {
+        return fechaTemporalCalcularSalida;
+    }
+
+    public void setFechaTemporalCalcularSalida(LocalDateTime fechaTemporalCalcularSalida) {
+        this.fechaTemporalCalcularSalida = fechaTemporalCalcularSalida;
     }
 
     public LocalDateTime getFechaCalcularSalida() {

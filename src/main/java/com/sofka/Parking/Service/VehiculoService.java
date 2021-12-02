@@ -55,7 +55,18 @@ public class VehiculoService {
         return vehiculoRepository.existsById(id);
     }
 
-    public String updateValor(Vehiculo vehiculo){
+    public String updateValorTemporal(Vehiculo vehiculo){
+        if(!existsByPlaca(vehiculo.getPlaca()))
+            return "no existe la placa a modificar";
+        Vehiculo vehiculoUpdate = findById(vehiculo.getId());
+        vehiculoUpdate.setFechaTemporalCalcularSalida(LocalDateTime.now());
+        vehiculoUpdate.setTotal((ChronoUnit.MINUTES.between(vehiculoUpdate.getFechaCalcularIngreso(), vehiculoUpdate.getFechaTemporalCalcularSalida()))*100);
+        vehiculoRepository.save(vehiculoUpdate);
+        return "producto actualizado";
+    }
+
+
+   public String updateValor(Vehiculo vehiculo){
         if(!existsByPlaca(vehiculo.getPlaca()))
             return "no existe la placa a modificar";
         Vehiculo vehiculoUpdate = findById(vehiculo.getId());
@@ -67,13 +78,17 @@ public class VehiculoService {
         return "producto actualizado";
     }
 
+
     public String updateSalida(Vehiculo vehiculo){
         if(!existsByPlaca(vehiculo.getPlaca()))
             return "no existe la placa a modificar";
         Vehiculo vehiculoUpdate = findById(vehiculo.getId());
         vehiculoUpdate.setEstado(false);
+        vehiculoUpdate.setFechaSalida(LocalDate.now());
+        vehiculoUpdate.setHoraSalida(LocalTime.now());
+        vehiculoUpdate.setFechaCalcularSalida(LocalDateTime.now());
+        vehiculoUpdate.setTotal((ChronoUnit.MINUTES.between(vehiculoUpdate.getFechaCalcularIngreso(), vehiculoUpdate.getFechaCalcularSalida()))*100);
         vehiculoRepository.save(vehiculoUpdate);
         return "producto actualizado";
     }
-
 }
